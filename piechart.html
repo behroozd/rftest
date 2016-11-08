@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+	<meta charset="utf-8">
+	
+	<link rel="stylesheet" media="screen" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" media="screen" href="css/font-awesome.min.css" />
+	<link rel="stylesheet" media="screen" href="css/style.css" />
+
+	<script src="js/d3.min.js"></script>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+	<script src="js/jquery.ntkPieChart.js"></script>
+	<script src="pieData.js"></script>
+
+	<script type="text/javascript">
+	//---------------------------------------------------------------------
+	$(document).ready(function(){
+		//-----------------------------------------------------------------
+		var tmp = data.length;
+		tmp = Math.round(100/parseInt(tmp))-1;
+		//-----------------------------------------------------------------
+		var sum = 0;
+		for( var i=0; i<data.length; i++){
+			sum += parseFloat(data[i].value);
+			$(".legend").append('<div class="data"><span style="background:#'+data[i].color+'"></span><h5>'+data[i].caption+'</h5><h2>'+data[i].value+"%"+'</h2></div>');
+		}
+		//-----------------------------------------------------------------
+		$(".legend").css('width', "100%");
+		$(".legend .data").css('width', tmp+"%");
+		$(".legend .data").css('margin', "0 1px");
+		//-----------------------------------------------------------------
+		if(sum<100){
+			data.push({
+				label   : "",
+				caption : "",
+				value   : 100-sum,
+				color   : 'ffffff'
+			});
+		}
+		var piechart = $('#piechart').ntkPieChart({ data: data });
+		//-----------------------------------------------------------------
+	});
+	//---------------------------------------------------------------------
+	</script>
+</head>
+<body onResize="window.location.reload();">
+	
+
+	<div>
+		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class="active"><a href="#menu1" aria-controls="menu1" role="tab" data-toggle="tab">Diagram Stats</a></li>
+			<li role="presentation" ><a href="#menu2" aria-controls="menu2" role="tab" data-toggle="tab">Month Report</a></li>
+		</ul>
+	</div>
+		
+				
+				
+				
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="menu1">
+	<div id="text-holder">
+			<h4 class="title" >DATA TRANSFER</h4>
+	
+	</div>
+					<div class="overlay" >
+						<h6>2,235 files</h6>
+						<h1>47Gb</h1>
+					</div>
+		<div>
+		
+				<div id="piechart" >
+					<div>
+				
+					</div>
+				</div>
+				<div>
+					<div class="legend"></div>
+				</div>
+			</div>
+			
+		</div>
+		<div role="tabpanel" class="tab-pane" id="menu2">&nbsp;</div>
+	</div>
+	
+	<div class="footer">
+		<a>
+			<i class="fa fa-cloud-upload"></i>
+			<h5>Upload Files</h5>
+		</a>
+		<a>
+			<i class="fa fa-share-alt"></i>
+			<h5>share link</h5>
+		</a>
+		<a>
+			<i class="fa fa-history"></i>
+			<h5>back up</h5>
+		</a>
+	</div>
+</body>
+</html>
